@@ -1,4 +1,4 @@
-import { StyleSheet, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Button, TextInput, FlatList } from 'react-native';
 import { useState } from 'react';
 
 import { Text, View } from '../../components/Themed';
@@ -26,11 +26,14 @@ export default function TabOneScreen() {
         <Button title='Click me' onPress={addGoalInputHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          {courseGoals.map((item: string) => (
-            <Text style={styles.goalItem}>{item}</Text>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            itemData.index
+            return <Text style={styles.goalItem}>{itemData.item}</Text>;
+          }}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   );
